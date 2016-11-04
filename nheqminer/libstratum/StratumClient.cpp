@@ -377,6 +377,9 @@ void StratumClient<Miner, Job, Solution>::processReponse(const Object& responseO
 			}
 			BOOST_LOG_CUSTOM(warning) << CL_RED "Rejected share #" << id << CL_N " (" << reason << ")";
             p_miner->rejectedSolution(m_stale);
+            if(reason=="unauthorized worker"){
+                reconnect();
+            }
         }
         break;
     
